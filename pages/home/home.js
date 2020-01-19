@@ -13,7 +13,7 @@ Page({
       url: 'http://192.168.29.38/weixinCase/data/data.js',
       success:function (_res){
         pageData = _res.data;
-        console.log(_res.data);
+        console.log("data:"+_res.data);
         that.setData({
           data: pageData,
         })
