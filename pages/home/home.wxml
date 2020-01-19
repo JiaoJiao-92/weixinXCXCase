@@ -1,0 +1,66 @@
+<!-- 定位 -->
+<view class="home-addr-view">
+  <picker mode="region" bindchange="bindRegionChange" value="{{myAddress}}"  class="home-addr">
+    <view class="picker">
+      <icon class="iconfont icon-shouhuodizhi"></icon>
+      <text class="home-left">{{myAddress[2]}}</text>
+      <icon class="iconfont icon-xiangxiajiantou home-left"></icon>
+    </view>
+  </picker>
+    <span bindtap="searchClick" class="home-search-btn"><icon class="iconfont icon-wode"></icon>搜索</span>
+</view>
+<!-- 页面内容 -->
+<view class="home-news-t">
+  <text wx:for="{{data}}" wx:key="*this"  data-id="{{index}}" class='taskTitle {{choosePos == index ? "taskTitle-active" : ""}}' bindtap="chooseList">{{item.title}}</text>
+</view>
+<view class="home-news-list" wx:for="{{data}}" wx:key="*this" wx:if="{{index===choosePos}}">
+  <!-- 有的栏目下有swiper -->
+  <view class="page-section page-section-spacing swiper"  wx:if="{{item.swiperList}}">
+    <swiper  class="home-swiper" indicator-dots="{{true}}" circular="{{true}}" autoplay="{{true}}" interval="3000" duration="500">
+      <block wx:for="{{item.swiperList}}" wx:key="*this"  wx:for-index="sw_index" wx:for-item="sw_item">
+        <swiper-item data-param="{{sw_index}}" bindtap="linkPic">
+          <image src="{{sw_item.pic}}"  mode='scaleToFill' class="home-swiper-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- 子栏目按钮区域 -->
+  <view wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="sub_item" wx:if="{{item.list}}">
+    <span bindtap="chooseSubList"  data-id="{{idx}}" class="home-item-btn {{chooseSubPos==idx?'btn-active':''}}">
+      {{sub_item.title}}
+    </span>
+  </view>
+  <!-- 子栏目新闻区域 -->
+  <view class="home-news-item"  bindtap="detailPage1" data-param="{{idx_con}}"  wx:for="{{item.list[chooseSubPos].contentList}}" wx:for-index="idx_con" wx:for-item="con_item">
+    <p class="home-news-title">
+      {{con_item.isVideo==1?'【播放】':''}}{{con_item.title}}
+    </p>
+    <span  class="home-news-btn" wx:if="{{con_item.fav==1}}">收藏</span>
+    <span class="home-news-source">
+      {{con_item.source}}
+    </span>
+    <span class="home-news-view">
+      {{con_item.view}}
+    </span>
+    <span class="home-news-pinglun">
+      {{con_item.pinglun}}
+    </span>
+  </view>
+  <!--直接栏目下的新闻区域 -->
+  <view class="home-news-item" wx:if="{{item.contentList}}" wx:for="{{item.contentList}}" wx:for-index="idx_con2" wx:for-item="con_item2" bindtap="detailPage2" data-param="{{idx_con2}}"> 
+    <p class="home-news-title">
+      {{con_item2.isVideo==1?'【播放】':''}} {{con_item2.title}}
+    </p>
+    <span  class="home-news-btn" wx:if="{{con_item2.fav==1}}">收藏</span>
+    <span class="home-news-source">
+      {{con_item2.source}}
+    </span>
+    <span class="home-news-view">
+      {{con_item2.view}}
+    </span>
+    <span class="home-news-pinglun">
+      {{con_item2.pinglun}}
+    </span>
+  </view>
+</view>
+

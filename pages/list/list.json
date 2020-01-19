@@ -1,0 +1,5 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "上拉加载更多测试",
+  "enablePullDownRefresh": true
+}

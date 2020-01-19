@@ -1,0 +1,11 @@
+<!--pages/detail/detail.wxml-->
+<view class="detail-title-box">
+  <text class="detail-title">{{contentData.id+contentData.title}}</text>
+  <text class="detail-source">{{contentData.source}}</text>
+  <text class="detail-view">{{contentData.view}}</text>
+  <text class="detail-date">{{contentData.date}}</text>
+  
+</view>
+<view class="detail-con">
+    {{contentData.content}}
+</view>
